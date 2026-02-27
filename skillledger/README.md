@@ -159,6 +159,72 @@ Total Score = (Challenge Score × 0.4) + (Endorsement Score × 0.35) + (Proficie
 - **Proficiency Score (25%)**: Based on self-reported proficiency and experience
 - **Time Decay**: Skills decay over time if not updated (starts after 90 days)
 
+## Deployment Instructions
+
+### Frontend Deployment (Next.js)
+The frontend is configured for static export and can be deployed to any static hosting platform.
+
+1. **Build the frontend for static export:**
+
+```
+   cd skillledger/frontend
+   npm run build
+```
+
+   This creates an `out` folder with static HTML, CSS, and JS files.
+
+2. **Deploy to Vercel (recommended):**
+   - Connect your GitHub repo to Vercel
+   - Set the root directory to `skillledger/frontend`
+   - Add environment variables in Vercel dashboard:
+     
+```
+     NEXT_PUBLIC_API_URL=https://your-backend-url.com/api
+     
+```
+   - Vercel will automatically detect Next.js and build it
+
+3. **Deploy to Netlify:**
+   - Set build command: `npm run build`
+   - Publish directory: `out` (not `.next`)
+   - Add environment variables in Netlify dashboard
+
+4. **Deploy to any static hosting (GitHub Pages, Firebase, etc.):**
+   - Upload the contents of the `out` folder to your hosting provider
+   - Make sure to set the `NEXT_PUBLIC_API_URL` environment variable during build
+
+### Backend Deployment
+The backend is a Node.js/Express API that can be deployed to Heroku, Railway, Render, or any Node.js hosting.
+
+1. **For Heroku:**
+   - Create a Heroku app
+   - Set environment variables in Heroku dashboard
+   - Deploy from GitHub or using Heroku CLI
+
+2. **For Railway:**
+   - Connect GitHub repo
+   - Set root directory to `skillledger/backend`
+   - Add environment variables
+
+3. **For Render:**
+   - Create a Web Service
+   - Connect GitHub repo
+   - Set build command: `npm install`
+   - Set start command: `npm start`
+   - Add environment variables
+
+### Environment Variables
+Make sure to set these environment variables in your deployment platform:
+
+**Backend:**
+- `MONGODB_URI` - Your MongoDB connection string
+- `JWT_SECRET` - A secure random string
+- `JWT_EXPIRE` - Token expiration (e.g., 30d)
+- `NODE_ENV` - production
+
+**Frontend:**
+- `NEXT_PUBLIC_API_URL` - URL of your deployed backend API
+
 ## License
 
 MIT
